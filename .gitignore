@@ -1,0 +1,42 @@
+# Ignore Visual Studio build files
+*.obj
+*.exe
+# Keep mod DLLs; ignore build artifacts via bin/ and obj/
+# *.dll
+*.pdb
+*.cache
+*.log
+*.vspscc
+*.vssscc
+*.suo
+*.user
+*.sln.docstates
+*.sln.ide
+*.sln.iml
+*.sln
+*.csproj.user
+*.dbmdl
+*.bak
+*.swp
+*.tmp
+*.ide
+*.ipch
+*.aps
+*.ncb
+*.opendb
+*.opensdf
+*.sdf
+*.VC.db
+*.VC.opendb
+*.vscode/
+# Ignore build output
+bin/
+obj/
+.venv/
+log_tail.ps1
+# Ignore mod output
+Mod/BetterTurrets/*.bak
+Mod/BetterTurrets/*.tmp
+# Ignore OS generated files
+.DS_Store
+Thumbs.db

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configs>
+	<!-- Turret active count scaling: level2 = 2 turrets, level4 = 4 turrets. -->
+	<set xpath="//perk[@name='perkTurrets']/effect_group/passive_effect[@name='JunkTurretActiveCount' and @operation='base_set']/@value">0</set>
+	<remove xpath="//perk[@name='perkTurrets']/effect_group/passive_effect[@name='JunkTurretActiveCount' and @operation='base_add']" />
+	<append xpath="//perk[@name='perkTurrets']/effect_group">
+		<!-- Keep +1 from level 2 through 3, then +3 from level 4 through 5. -->
+		<passive_effect name="JunkTurretActiveCount" operation="base_add" level="2,3" value="1,1"/>
+		<passive_effect name="JunkTurretActiveCount" operation="base_add" level="4,5" value="3,3"/>
+	</append>
+</configs>

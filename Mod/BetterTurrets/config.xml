@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+
+	<!-- BetterTurrets runtime tuning; the DLL reads these values. -->
+	<btSettings>
+		<!-- Multiplies turret magazine size. Set to 1.0 to disable code-based scaling when using XML overrides. -->
+		<magazineMultiplier>1.0</magazineMultiplier>
+		<!-- Flat multiplier applied to all turret-origin damage. -->
+		<baseTurretDamageMultiplier>.75</baseTurretDamageMultiplier>
+		<!-- Additional damage bonus per deployed owned turret (fractional). Default is +25% per turret. -->
+		<perTurretDamageBonus>0.45</perTurretDamageBonus>
+	</btSettings>
+</config>

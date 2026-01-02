@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+    <!-- Base mag 62 -> 124 -->
+    <set xpath="/items/item[@name='gunBotT2JunkTurret']/effect_group[@name='gunBotT2JunkTurret']/passive_effect[@name='MagazineSize' and @operation='base_set' and @tags='turretRanged']/@value">124</set>
+    <!-- Tier mag add 6..30 (Q2..Q6) -> 12..60 -->
+    <set xpath="/items/item[@name='gunBotT2JunkTurret']/effect_group[@name='gunBotT2JunkTurret']/passive_effect[@name='MagazineSize' and @operation='base_add' and @tags='turretRanged' and @tier='2,6']/@value">12,60</set>
+</config>
