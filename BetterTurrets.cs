@@ -87,8 +87,9 @@ internal static class TurretAmmoHudPatch
 
 	private static void Postfix(EntityPlayerLocal __instance)
 	{
-		// Only show for the local, living player with an attached world.
-		if (__instance == null || __instance.isEntityRemote || __instance.IsDead())
+		// Only show for the living local player with an attached world.
+		// Non-host clients report isEntityRemote=true for their own EntityPlayerLocal, so skip that check.
+		if (__instance == null || __instance.IsDead())
 			return;
 
 		var world = __instance.world;
@@ -115,9 +116,10 @@ internal static class TurretAmmoHudPatch
 			if (entity is not EntityTurret turret)
 				continue;
 
-			if (turret.IsDead() || turret.isEntityRemote)
+			if (turret.IsDead())
 				continue;
 
+			// On clients, owned turrets are reported as remote. We still want to show their HUD rows.
 			if (turret.belongsPlayerId != __instance.entityId)
 				continue;
 
@@ -487,12 +489,12 @@ internal static class TurretDamageScalingPatch
 				continue;
 			}
 
-			if (turret.IsDead() || turret.isEntityRemote)
+			if (turret.belongsPlayerId != owner.entityId)
 			{
 				continue;
 			}
 
-			if (turret.belongsPlayerId != owner.entityId)
+			if (!IsTurretActive(turret))
 			{
 				continue;
 			}
@@ -501,6 +503,49 @@ internal static class TurretDamageScalingPatch
 		}
 
 		return count;
+	}
+
+	private static readonly MethodInfo TurretIsActiveGetter = AccessTools.PropertyGetter(typeof(EntityTurret), "IsActive")
+		?? AccessTools.PropertyGetter(typeof(EntityTurret), "IsActivated")
+		?? AccessTools.PropertyGetter(typeof(EntityTurret), "IsOn");
+
+	private static readonly FieldInfo TurretActiveField = AccessTools.Field(typeof(EntityTurret), "isActive")
+		?? AccessTools.Field(typeof(EntityTurret), "bActive")
+		?? AccessTools.Field(typeof(EntityTurret), "m_bActive");
+
+	private static bool IsTurretActive(EntityTurret turret)
+	{
+		if (turret == null || turret.IsDead())
+		{
+			return false;
+		}
+
+		try
+		{
+			if (TurretIsActiveGetter != null && TurretIsActiveGetter.Invoke(turret, null) is bool activeFromGetter)
+			{
+				return activeFromGetter;
+			}
+		}
+		catch
+		{
+			// ignore reflection failures and fall through
+		}
+
+		try
+		{
+			if (TurretActiveField != null && TurretActiveField.GetValue(turret) is bool activeFromField)
+			{
+				return activeFromField;
+			}
+		}
+		catch
+		{
+			// ignore reflection failures and fall through
+		}
+
+		// Fallback: treat turrets with ammo as active. This caps scaling when many are deployed but only a few are in use.
+		return turret.AmmoCount > 0;
 	}
 }
 

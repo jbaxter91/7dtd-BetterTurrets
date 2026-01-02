@@ -8,6 +8,6 @@
 		<!-- Flat multiplier applied to all turret-origin damage. -->
 		<baseTurretDamageMultiplier>.75</baseTurretDamageMultiplier>
 		<!-- Additional damage bonus per deployed owned turret (fractional). Default is +25% per turret. -->
-		<perTurretDamageBonus>0.45</perTurretDamageBonus>
+		<perTurretDamageBonus>0.35</perTurretDamageBonus>
 	</btSettings>
 </config>
