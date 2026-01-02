@@ -5,7 +5,7 @@ Quality-of-life and balance tweaks for deployable turrets in 7 Days To Die.
 
 What it does
 ------------
-- Shows a lightweight on-screen turret HUD with ammo counts; icons tint to your dye color and get themed nicknames (TMNT palette; undyed turrets get unique fallback names).
+- Shows a lightweight on-screen turret HUD with ammo counts; icons tint to your dye color and get themed nicknames.
 - Adds a hold-E reload radial option so you can refill deployed turrets without picking them up.
 - Scales turret damage (and optionally penalizes player damage) at perkTurrets 5 based on how many owned turrets are deployed; values are configurable.
 - Doubles (or customizes) turret magazines via config. Code-based multiplier is disabled by default; XML overrides are provided for junk turrets.
